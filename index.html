@@ -232,14 +232,33 @@ function renderLogin() {
   `;
 }
 
-function login() {
-  // TEMP: frontend-only placeholder
-  state.user = {
-    email: document.getElementById("email").value,
-    name: "New User"
-  };
-  saveUser();
-  route("profile");
+async function login() {
+  const email = document.getElementById("email").value;
+
+  const res = await fetch("https://YOUR_BACKEND_URL/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-region": "NA"
+    },
+    body: JSON.stringify({
+      email,
+      ageVerified: state.ageVerified
+    })
+  });
+
+  const data = await res.json();
+
+  if (data.token) {
+    state.user = {
+      email,
+      token: data.token
+    };
+    saveUser();
+    route("profile");
+  } else {
+    alert(data.error || "Login failed");
+  }
 }
 
 function renderProfile() {

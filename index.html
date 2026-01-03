@@ -2,187 +2,224 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Legion Live</title>
-
+<title>LEGION LIVE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#8b0000" />
-<meta name="description" content="Legion Live – 21+ live streaming platform" />
 
-<!-- PWA basics -->
-<link rel="manifest" href="data:application/json,{
-  &quot;name&quot;:&quot;Legion Live&quot;,
-  &quot;short_name&quot;:&quot;Legion&quot;,
-  &quot;start_url&quot;:&quot;.&quot;,
-  &quot;display&quot;:&quot;standalone&quot;,
-  &quot;background_color&quot;:&quot;#000000&quot;,
-  &quot;theme_color&quot;:&quot;#8b0000&quot;
-}" />
-
+<!-- =================== ROMAN LEGION THEME =================== -->
 <style>
-/* ===============================
-   GLOBAL STYLES
-=============================== */
 * { box-sizing: border-box; }
 
 :root {
-  --bg: #000;
-  --panel: #111;
-  --border: #8b0000;
-  --text: #e5e5e5;
-  --accent: #c00000;
-  --muted: #777;
+  --bg: #070707;
+  --panel: #111111;
+  --border: #3a2a14;
+  --primary: #7b0d0d;
+  --accent: #b08d57;
+  --text: #e8e3d9;
+  --muted: #8a8a8a;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: radial-gradient(circle at top, #0f0f0f, var(--bg));
   color: var(--text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: system-ui, sans-serif;
 }
 
+/* =================== HEADER =================== */
 header {
-  padding: 14px;
+  padding: 20px;
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
-  border-bottom: 2px solid var(--border);
-  background: #050505;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: linear-gradient(to bottom, #140b0b, #050505);
+  border-bottom: 3px solid var(--border);
 }
 
+/* Subtle Legion Insignia */
+header::after {
+  content: "⚔";
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 6px;
+  opacity: 0.6;
+}
+
+/* =================== NAV =================== */
 nav {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #300;
-  background: #0a0a0a;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  gap: 12px;
+  padding: 12px;
+  background: #0b0b0b;
+  border-bottom: 1px solid var(--border);
 }
 
 nav button {
-  background: #000;
+  background: transparent;
   color: var(--text);
   border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 nav button:hover {
-  background: var(--border);
+  background: var(--primary);
+  border-color: var(--accent);
 }
 
+/* =================== LAYOUT =================== */
 main {
   max-width: 1100px;
   margin: auto;
-  padding: 16px;
+  padding: 18px;
 }
 
-/* ===============================
-   CARDS & UI
-=============================== */
 .card {
-  background: var(--panel);
+  background: linear-gradient(145deg, #121212, #0b0b0b);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 0 1px rgba(176,141,87,0.05);
 }
 
+/* Roman Standard Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 18px 0;
+  opacity: 0.8;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider span {
+  margin: 0 12px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+/* =================== TEXT =================== */
 h2 {
   margin-top: 0;
-}
-
-input, textarea {
-  width: 100%;
-  background: #000;
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-button.primary {
-  background: var(--border);
-  border: none;
-  padding: 10px;
-  color: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button.primary:hover {
-  background: var(--accent);
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .small {
-  font-size: 0.85rem;
   color: var(--muted);
+  font-size: 0.85rem;
 }
 
-/* ===============================
-   STREAM UI
-=============================== */
+/* =================== INPUTS =================== */
+input, textarea {
+  width: 100%;
+  background: #050505;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* =================== BUTTONS =================== */
+button.primary {
+  background: linear-gradient(to bottom, #8f1414, var(--primary));
+  border: 1px solid var(--accent);
+  padding: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+button.primary:hover {
+  filter: brightness(1.1);
+}
+
+/* =================== VIDEO =================== */
 video {
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
+  border-radius: 10px;
+  border: 2px solid var(--border);
   background: #000;
 }
 
-.stream-controls {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+/* =================== WARNINGS =================== */
+.warning {
+  background: linear-gradient(to bottom, #2a0a0a, #1a0505);
+  border: 1px solid var(--primary);
+  padding: 14px;
+  border-radius: 10px;
+  color: #ffb3b3;
+  font-weight: 700;
 }
 
-/* ===============================
-   ADMIN / WARNINGS
-=============================== */
-.warning {
-  background: #300;
-  border: 1px solid red;
-  padding: 10px;
-  border-radius: 10px;
-  color: #ffaaaa;
+/* =================== RANK BADGES =================== */
+.rank {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+}
+
+.rank.viewer { background: #222; }
+.rank.legionnaire { background: #4a0f0f; color: #fff; }
+.rank.centurion { background: #7b0d0d; border-color: var(--accent); }
+.rank.tribune { background: #b08d57; color: #000; }
+
+/* =================== TRIBUNAL PANEL =================== */
+.tribunal {
+  background: linear-gradient(145deg, #1a1212, #0c0808);
+  border: 2px solid var(--accent);
+}
+
+.tribunal h2 {
+  color: #ffcccc;
 }
 </style>
 </head>
 
 <body>
 
-<header>Legion Live</header>
+<header>LEGION • LIVE</header>
 
 <nav>
   <button onclick="route('home')">Home</button>
   <button onclick="route('login')">Login</button>
   <button onclick="route('profile')">Profile</button>
   <button onclick="route('stream')">Go Live</button>
-  <button onclick="route('wallet')">Wallet</button>
+  <button onclick="route('admin')">Tribunal</button>
 </nav>
 
 <main id="app"></main>
 
 <script>
-/* ===============================
-   BASIC ROUTER
-=============================== */
+// ================= CONFIG =================
+const API_BASE = "https://legion-live-backend.onrender.com";
+
+// ================= STATE ==================
 const app = document.getElementById("app");
-
-function route(page) {
-  if (page === "home") renderHome();
-  if (page === "login") renderLogin();
-  if (page === "profile") renderProfile();
-  if (page === "stream") renderStream();
-  if (page === "wallet") renderWallet();
-}
-
-/* ===============================
-   APP STATE (CLIENT SIDE ONLY)
-=============================== */
 const state = {
   user: JSON.parse(localStorage.getItem("legion_user")) || null,
   ageVerified: localStorage.getItem("age_verified") === "yes"
@@ -192,59 +229,62 @@ function saveUser() {
   localStorage.setItem("legion_user", JSON.stringify(state.user));
 }
 
-/* ===============================
-   SCREENS
-=============================== */
+// ================= ROUTER =================
+function route(page) {
+  if (page === "home") renderHome();
+  if (page === "login") renderLogin();
+  if (page === "profile") renderProfile();
+  if (page === "stream") renderStream();
+  if (page === "admin") renderAdmin();
+}
 
+// ================= SCREENS =================
 function renderHome() {
   app.innerHTML = `
     <div class="card">
-      <h2>Welcome to Legion Live</h2>
-      <p class="small">
-        Legion Live is a 21+ live streaming platform with strict moderation.
-        No nudity. No drugs. Zero tolerance for minors on stream.
-      </p>
+      <h2>Legion Protocol</h2>
+      <div class="divider"><span>⚔</span></div>
       ${!state.ageVerified ? `
         <div class="warning">
-          <strong>Age Verification Required</strong><br>
-          You must confirm you are 21+ to proceed.
-          <button class="primary" onclick="verifyAge()">I am 21+</button>
-        </div>
-      ` : `<p class="small">Age verified ✔</p>`}
-    </div>
-  `;
+          Tribunal Decree: 21+ Only
+          <br><br>
+          <button class="primary" onclick="verifyAge()">I Am 21+</button>
+        </div>` :
+        `<p class="small">Age verified by decree ✔</p>`}
+    </div>`;
 }
 
 function verifyAge() {
-  localStorage.setItem("age_verified", "yes");
   state.ageVerified = true;
+  localStorage.setItem("age_verified", "yes");
   renderHome();
 }
 
 function renderLogin() {
   app.innerHTML = `
     <div class="card">
-      <h2>Login / Register</h2>
+      <h2>Enter the Legion</h2>
+      <div class="divider"><span>STANDARD</span></div>
       <input placeholder="Email" id="email" />
-      <input placeholder="Password" type="password" id="password" />
-      <button class="primary" onclick="login()">Continue</button>
-    </div>
-  `;
+      <button class="primary" onclick="login()">Proceed</button>
+    </div>`;
 }
 
 async function login() {
+  if (!state.ageVerified) {
+    alert("Tribunal requires 21+ verification.");
+    return;
+  }
+
   const email = document.getElementById("email").value;
 
-  const res = await fetch("https://YOUR_BACKEND_URL/auth/login", {
+  const res = await fetch(API_BASE + "/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "x-region": "NA"
     },
-    body: JSON.stringify({
-      email,
-      ageVerified: state.ageVerified
-    })
+    body: JSON.stringify({ email, ageVerified: true })
   });
 
   const data = await res.json();
@@ -252,25 +292,28 @@ async function login() {
   if (data.token) {
     state.user = {
       email,
-      token: data.token
+      token: data.token,
+      name: email.split("@")[0],
+      rank: "legionnaire"
     };
     saveUser();
     route("profile");
   } else {
-    alert(data.error || "Login failed");
+    alert(data.error || "Denied by tribunal.");
   }
 }
 
 function renderProfile() {
   if (!state.user) return route("login");
+
   app.innerHTML = `
     <div class="card">
-      <h2>Profile</h2>
+      <h2>Legionnaire Record</h2>
+      <span class="rank ${state.user.rank}">${state.user.rank}</span>
+      <div class="divider"><span>INSIGNIA</span></div>
       <input value="${state.user.name}" onchange="updateName(this.value)" />
-      <textarea placeholder="About me"></textarea>
-      <p class="small">Creator payouts, verification, and moderation are enforced server-side.</p>
-    </div>
-  `;
+      <textarea placeholder="Oath / About Me"></textarea>
+    </div>`;
 }
 
 function updateName(v) {
@@ -278,48 +321,48 @@ function updateName(v) {
   saveUser();
 }
 
-function renderStream() {
-  if (!state.ageVerified) return route("home");
-
-  app.innerHTML = `
-    <div class="card">
-      <h2>Go Live</h2>
-      <video id="video" autoplay muted></video>
-      <div class="stream-controls">
-        <button class="primary" onclick="startStream()">Start Camera</button>
-        <button onclick="stopStream()">Stop</button>
-      </div>
-      <p class="small">Live moderation is enforced. Streams may be terminated automatically.</p>
-    </div>
-  `;
-}
-
 let mediaStream = null;
 
+function renderStream() {
+  app.innerHTML = `
+    <div class="card">
+      <h2>Broadcast Standard</h2>
+      <video id="video" autoplay muted></video>
+      <div class="divider"><span>LIVE</span></div>
+      <button class="primary" onclick="startStream()">Raise Standard</button>
+      <button onclick="stopStream()">Lower Standard</button>
+    </div>`;
+}
+
 async function startStream() {
-  mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-  document.getElementById("video").srcObject = mediaStream;
+  try {
+    mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    document.getElementById("video").srcObject = mediaStream;
+  } catch {
+    alert("Tribunal denied camera or microphone.");
+  }
 }
 
 function stopStream() {
-  if (!mediaStream) return;
-  mediaStream.getTracks().forEach(t => t.stop());
+  if (mediaStream) {
+    mediaStream.getTracks().forEach(t => t.stop());
+  }
 }
 
-function renderWallet() {
+/* ================= TRIBUNAL (ADMIN UI) ================= */
+function renderAdmin() {
   app.innerHTML = `
-    <div class="card">
-      <h2>Wallet</h2>
-      <p>Coins: <strong>0</strong></p>
-      <button class="primary">Buy Coins</button>
-      <p class="small">Payments and cash-out handled securely via backend.</p>
-    </div>
-  `;
+    <div class="card tribunal">
+      <h2>Tribunal Chamber</h2>
+      <div class="divider"><span>JUDGMENT</span></div>
+      <p class="small">
+        Administrative oversight, stream termination, and enforcement actions.
+        (UI only — logic enforced server-side.)
+      </p>
+      <button class="primary">Terminate Stream</button>
+    </div>`;
 }
 
-/* ===============================
-   INITIAL LOAD
-=============================== */
 route("home");
 </script>
 

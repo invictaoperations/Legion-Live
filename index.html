@@ -2,216 +2,201 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Legion Live</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- =========================================================
+ LEGION LIVE — PHASE 2C (FULL EXPANDED FRONTEND)
+ Single-file SPA (HTML + CSS + JS)
+ Frontend-only. No Render / backend / DB changes.
+ ========================================================= -->
 
 <style>
-/* ===============================
-   GLOBAL THEME
-   =============================== */
+/* =========================================================
+   DESIGN SYSTEM — BATTLE-WORN ROMAN / MODERN STREAMING
+   ========================================================= */
 
-:root {
-  --bg-main: #0b0d10;
-  --bg-panel: #12151b;
-  --bg-panel-soft: #161a21;
-  --border-muted: #2a2f3a;
-  --accent-bronze: #b08d57;
-  --accent-bronze-soft: #7d6642;
-  --text-main: #e6e6e6;
-  --text-muted: #9aa0ab;
-  --danger: #8b1e1e;
+/* ---------- COLOR TOKENS ---------- */
+:root{
+  --bg-main:#0b0f14;
+  --bg-panel:#121923;
+  --bg-panel-soft:#0f1620;
+  --bg-deep:#070a0f;
+
+  --border-subtle:#242d3a;
+  --border-bronze:rgba(198,161,91,.28);
+
+  --bronze:#c6a15b;
+  --bronze-d:#8a6a2f;
+  --iron:#8b8f96;
+
+  --text-main:#e6e9ee;
+  --text-muted:#9aa4b2;
+  --text-dim:#6f7683;
+
+  --ok:#3aa76d;
+  --warn:#c9a33a;
+  --danger:#7a1e1e;
+
+  --shadow-soft:0 8px 28px rgba(0,0,0,.35);
 }
 
-* {
-  box-sizing: border-box;
+/* ---------- RESET ---------- */
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;
+  background:
+    radial-gradient(1200px 700px at top, #151c28 0%, var(--bg-main) 60%);
+  color:var(--text-main);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
 
-body {
-  margin: 0;
-  background: radial-gradient(1200px at top, #141821, #07080b);
-  color: var(--text-main);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-/* ===============================
+/* =========================================================
    HEADER
-   =============================== */
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-  border-bottom: 1px solid var(--border-muted);
-  background: linear-gradient(to bottom, #0e1118, #0a0c11);
+   ========================================================= */
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;
+  background:linear-gradient(to bottom,#0f1622,#0b0f14);
+  border-bottom:1px solid var(--border-bronze);
 }
-
-header h1 {
-  margin: 0;
-  font-size: 20px;
-  letter-spacing: 3px;
-  font-weight: 700;
+header h1{
+  margin:0;font-size:20px;letter-spacing:4px;font-weight:800;
 }
-
-header span {
-  color: var(--accent-bronze);
-  font-weight: 600;
+header h1 span{color:var(--bronze)}
+.header-right{display:flex;align-items:center;gap:12px}
+.badge{
+  padding:6px 12px;border-radius:6px;
+  border:1px solid var(--bronze-d);
+  color:var(--bronze);font-size:12px;letter-spacing:1px;
 }
+.badge.mod{border-color:#7a5b2f;color:#d6c08a}
+.badge.admin{border-color:#7a1e1e;color:#e2b1b1}
 
-/* ===============================
+/* =========================================================
    LAYOUT
-   =============================== */
+   ========================================================= */
+main{
+  max-width:1400px;margin:0 auto;padding:26px;
+  display:grid;grid-template-columns:260px 1fr;gap:26px;
+}
+@media(max-width:900px){main{grid-template-columns:1fr}}
 
-main {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
-  gap: 24px;
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+aside{
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-soft));
+  border:1px solid var(--border-bronze);
+  border-radius:14px;
+  padding:16px;
+  box-shadow:var(--shadow-soft);
+}
+.nav-btn{
+  display:flex;align-items:center;gap:10px;
+  width:100%;padding:12px 14px;margin-bottom:8px;
+  background:none;border:1px solid transparent;
+  color:var(--text-muted);
+  text-align:left;cursor:pointer;border-radius:10px;
+  font-size:14px;
+}
+.nav-btn.active{
+  background:#0b111a;
+  border-color:var(--border-bronze);
+  color:var(--text-main);
+}
+.nav-btn.hidden{display:none}
+.nav-btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+.panel{
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-soft));
+  border:1px solid var(--border-bronze);
+  border-radius:16px;
+  padding:26px;margin-bottom:26px;
+  box-shadow:var(--shadow-soft);
+}
+.panel h2{
+  margin:0 0 8px 0;
+  font-weight:700;letter-spacing:1px;color:var(--bronze);
+}
+.panel p{margin:0;color:var(--text-muted);font-size:14px}
+.divider{
+  height:1px;margin:20px 0;
+  background:linear-gradient(to right,transparent,rgba(198,161,91,.5),transparent);
 }
 
-aside {
-  width: 260px;
-  background: var(--bg-panel);
-  border: 1px solid var(--border-muted);
-  padding: 16px;
+/* =========================================================
+   FORMS
+   ========================================================= */
+label{display:block;margin:16px 0 6px;color:var(--text-muted);font-size:13px}
+input,textarea{
+  width:100%;padding:12px 14px;
+  background:#0b111a;
+  border:1px solid rgba(198,161,91,.25);
+  border-radius:10px;
+  color:var(--text-main);font-size:14px;
+}
+textarea{min-height:120px;resize:vertical}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+button.primary{
+  margin-top:18px;padding:12px 20px;
+  background:linear-gradient(180deg,var(--bronze),var(--bronze-d));
+  border:none;border-radius:10px;
+  color:#111;font-weight:800;cursor:pointer;
+}
+button.secondary{
+  margin-top:10px;padding:10px 16px;
+  background:#0b111a;border:1px solid var(--border-subtle);
+  border-radius:10px;color:var(--text-main);cursor:pointer;
+}
+button.danger{
+  background:#140b0c;border:1px solid #7a1e1e;color:#e2b1b1;
+}
+.status{margin-top:12px;font-size:13px}
+
+/* =========================================================
+   CARDS / TABLES / LISTS
+   ========================================================= */
+.card{
+  background:#0b111a;border:1px solid var(--border-subtle);
+  border-radius:14px;padding:16px;margin-bottom:14px;
+}
+.card .meta{color:var(--text-muted);font-size:12px;margin-bottom:6px}
+.card .title{font-weight:700}
+.table{
+  width:100%;border-collapse:collapse;margin-top:10px;
+}
+.table th,.table td{
+  padding:10px;border-bottom:1px solid var(--border-subtle);
+  font-size:13px;text-align:left;
+}
+.table th{color:var(--text-muted);font-weight:600}
+
+/* =========================================================
+   MODALS / TOASTS
+   ========================================================= */
+#toast{
+  position:fixed;bottom:20px;right:20px;
+  background:#0b111a;border:1px solid var(--border-bronze);
+  color:var(--text-main);padding:14px 18px;border-radius:12px;
+  box-shadow:var(--shadow-soft);
+  display:none;z-index:50;
 }
 
-section {
-  flex: 1;
-  background: var(--bg-panel);
-  border: 1px solid var(--border-muted);
-  padding: 24px;
-}
-
-/* ===============================
-   NAV
-   =============================== */
-
-.nav-btn {
-  display: block;
-  width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  background: none;
-  border: 1px solid transparent;
-  color: var(--text-muted);
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.nav-btn.active {
-  background: var(--bg-panel-soft);
-  border-color: var(--accent-bronze-soft);
-  color: var(--text-main);
-}
-
-.nav-btn:hover {
-  color: var(--text-main);
-}
-
-/* ===============================
-   PROFILE PANEL
-   =============================== */
-
-h2 {
-  margin-top: 0;
-  margin-bottom: 16px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.divider {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--accent-bronze-soft),
-    transparent
-  );
-  margin: 16px 0;
-}
-
-label {
-  display: block;
-  margin-top: 16px;
-  margin-bottom: 6px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 10px;
-  background: #0b0e14;
-  border: 1px solid var(--border-muted);
-  color: var(--text-main);
-  resize: vertical;
-}
-
-textarea {
-  min-height: 90px;
-}
-
-button.primary {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(to bottom, #b08d57, #8a6b3f);
-  border: none;
-  color: #000;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button.primary:hover {
-  filter: brightness(1.05);
-}
-
-.status {
-  margin-top: 12px;
-  font-size: 13px;
-}
-
-/* ===============================
-   RANK BADGE
-   =============================== */
-
-.rank-badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border: 1px solid var(--accent-bronze-soft);
-  color: var(--accent-bronze);
-  font-size: 12px;
-  margin-top: 8px;
-}
-
-/* ===============================
+/* =========================================================
    FOOTER
-   =============================== */
-
-footer {
-  text-align: center;
-  padding: 18px;
-  color: var(--text-muted);
-  font-size: 12px;
-  border-top: 1px solid var(--border-muted);
-}
-
-/* ===============================
-   RESPONSIVE
-   =============================== */
-
-@media (max-width: 900px) {
-  main {
-    flex-direction: column;
-  }
-
-  aside {
-    width: 100%;
-  }
+   ========================================================= */
+footer{
+  text-align:center;padding:28px;
+  color:var(--text-muted);font-size:12px;
+  border-top:1px solid var(--border-bronze);
 }
 </style>
 </head>
@@ -220,100 +205,193 @@ footer {
 
 <header>
   <h1>LEGION <span>LIVE</span></h1>
-  <div class="rank-badge">LEGIONNAIRE</div>
+  <div class="header-right">
+    <div class="badge" id="rankBadge">LEGIONNAIRE</div>
+    <div class="badge hidden" id="roleBadge"></div>
+  </div>
 </header>
 
 <main>
 
   <aside>
-    <button class="nav-btn active">Profile</button>
-    <button class="nav-btn" disabled>Go Live (Soon)</button>
-    <button class="nav-btn" disabled>Feed (Soon)</button>
-    <button class="nav-btn" disabled>Tribunal (Admin)</button>
+    <button class="nav-btn active" onclick="showPanel('profile')">Profile</button>
+    <button class="nav-btn" onclick="showPanel('publicProfile')">Public Profile</button>
+    <button class="nav-btn" onclick="showPanel('feed')">Feed</button>
+    <button class="nav-btn" onclick="showPanel('roles')">Ranks & Roles</button>
+    <button class="nav-btn hidden" id="tribunalBtn" onclick="showPanel('tribunal')">Tribunal</button>
+    <button class="nav-btn" disabled>Go Live (Phase 3)</button>
   </aside>
 
-  <section>
-    <h2>Legion Record</h2>
-    <p style="color:var(--text-muted);font-size:14px;">
-      Your public record within the Legion.
-    </p>
+  <section id="content">
 
-    <div class="divider"></div>
+    <!-- ================= PROFILE ================= -->
+    <div class="panel" id="profile">
+      <h2>Legion Record</h2>
+      <p>Private profile controls and identity.</p>
+      <div class="divider"></div>
 
-    <label>Username</label>
-    <input id="username" placeholder="legionnaire_name" />
+      <label>Legion Name (public)</label>
+      <input id="displayName" placeholder="Choose your Legion name"/>
 
-    <label>About You</label>
-    <textarea id="about" placeholder="Background, oath, or public description"></textarea>
+      <label>Email (private)</label>
+      <input id="emailField" disabled />
 
-    <button class="primary" onclick="saveProfile()">Save Record</button>
+      <label>Oath / About You</label>
+      <textarea id="aboutField" placeholder="Your public oath, background, or declaration"></textarea>
 
-    <div id="status" class="status"></div>
+      <button class="primary" onclick="saveProfile()">Save Record</button>
+      <div id="profileStatus" class="status"></div>
+    </div>
+
+    <!-- ================= PUBLIC PROFILE ================= -->
+    <div class="panel" id="publicProfile" style="display:none">
+      <h2>Public Profile</h2>
+      <p>How other legionnaires see you.</p>
+      <div class="divider"></div>
+      <div class="card"><div class="meta">Name</div><div class="title" id="pubName">—</div></div>
+      <div class="card"><div class="meta">Rank</div><div class="title" id="pubRank">—</div></div>
+      <div class="card"><div class="meta">About</div><div id="pubAbout">—</div></div>
+    </div>
+
+    <!-- ================= FEED ================= -->
+    <div class="panel" id="feed" style="display:none">
+      <h2>Legion Feed</h2>
+      <p>Global activity across the Legion.</p>
+      <div class="divider"></div>
+      <div class="card"><div class="meta">System</div><div class="title">Feed UI live · backend connects Phase 3</div></div>
+    </div>
+
+    <!-- ================= ROLES / RANKS ================= -->
+    <div class="panel" id="roles" style="display:none">
+      <h2>Ranks & Roles</h2>
+      <p>Progression, permissions, and authority.</p>
+      <div class="divider"></div>
+      <table class="table">
+        <thead><tr><th>Rank</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Legionnaire</td><td>Standard member</td></tr>
+          <tr><td>Centurion</td><td>Trusted creator</td></tr>
+          <tr><td>Tribune</td><td>Senior authority</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ================= TRIBUNAL ================= -->
+    <div class="panel" id="tribunal" style="display:none">
+      <h2>Tribunal</h2>
+      <p>Moderation and enforcement tools (UI-only).</p>
+      <div class="divider"></div>
+      <button class="secondary">Review Reports</button>
+      <button class="secondary">Suspend Account</button>
+      <button class="danger">Terminate Stream</button>
+    </div>
+
   </section>
-
 </main>
 
 <footer>
   Legion Live · North America · Europe · Japan
 </footer>
 
+<div id="toast"></div>
+
 <script>
+/* =========================================================
+   STATE / CONFIG
+   ========================================================= */
 const API = "https://legion-live-backend-1.onrender.com";
+let state = { user:null, role:"user" };
 
-async function saveProfile() {
-  const username = document.getElementById("username").value.trim();
-  const about = document.getElementById("about").value.trim();
-  const status = document.getElementById("status");
+/* Elements */
+const displayNameInput=document.getElementById("displayName");
+const emailField=document.getElementById("emailField");
+const aboutField=document.getElementById("aboutField");
+const profileStatus=document.getElementById("profileStatus");
+const rankBadge=document.getElementById("rankBadge");
+const roleBadge=document.getElementById("roleBadge");
+const tribunalBtn=document.getElementById("tribunalBtn");
+const toast=document.getElementById("toast");
 
-  if (!username) {
-    status.style.color = "#c33";
-    status.textContent = "Username is required.";
+/* Nav */
+function showPanel(id){
+  document.querySelectorAll("#content>.panel").forEach(p=>p.style.display="none");
+  document.getElementById(id).style.display="block";
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+/* Toast */
+function showToast(msg){
+  toast.textContent=msg;toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",2500);
+}
+
+/* Role UI */
+function applyRoleUI(){
+  if(state.role==="admin"){
+    roleBadge.textContent="ADMIN";roleBadge.className="badge admin";
+    tribunalBtn.classList.remove("hidden");
+  }else if(state.role==="mod"){
+    roleBadge.textContent="MODERATOR";roleBadge.className="badge mod";
+    tribunalBtn.classList.remove("hidden");
+  }else{
+    roleBadge.classList.add("hidden");
+    tribunalBtn.classList.add("hidden");
+  }
+}
+
+/* Load Profile */
+async function loadProfile(){
+  const key=localStorage.getItem("legion_user");
+  if(!key)return;
+  try{
+    const res=await fetch(`${API}/me`,{headers:{Authorization:key}});
+    if(!res.ok)return;
+    const data=await res.json();
+    state.user=data;
+    displayNameInput.value=data.username||"";
+    aboutField.value=data.about_me||"";
+    rankBadge.textContent=(data.rank||"LEGIONNAIRE").toUpperCase();
+    document.getElementById("pubName").textContent=data.username||"—";
+    document.getElementById("pubRank").textContent=data.rank||"—";
+    document.getElementById("pubAbout").textContent=data.about_me||"—";
+    state.role=(data.username||"").toLowerCase().includes("admin")?"admin":
+               (data.username||"").toLowerCase().includes("mod")?"mod":"user";
+    applyRoleUI();
+  }catch(e){}
+}
+
+/* Save Profile */
+async function saveProfile(){
+  const username=displayNameInput.value.trim();
+  const about=aboutField.value.trim();
+  if(!username){
+    profileStatus.style.color="var(--danger)";
+    profileStatus.textContent="Legion name required.";
     return;
   }
-
-  try {
-    await fetch(`${API}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username })
+  try{
+    await fetch(`${API}/auth/login`,{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({username})
     });
-
-    await fetch(`${API}/me`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": username
-      },
-      body: JSON.stringify({ about_me: about })
+    await fetch(`${API}/me`,{
+      method:"PUT",
+      headers:{"Content-Type":"application/json","Authorization":username},
+      body:JSON.stringify({about_me:about})
     });
-
-    localStorage.setItem("legion_user", username);
-
-    status.style.color = "#4caf50";
-    status.textContent = "Profile saved.";
-  } catch (err) {
-    status.style.color = "#c33";
-    status.textContent = "Error saving profile.";
+    localStorage.setItem("legion_user",username);
+    profileStatus.style.color="var(--ok)";
+    profileStatus.textContent="Record saved.";
+    showToast("Profile saved");
+    loadProfile();
+  }catch(e){
+    profileStatus.style.color="var(--danger)";
+    profileStatus.textContent="Error saving record.";
   }
 }
 
-async function loadProfile() {
-  const username = localStorage.getItem("legion_user");
-  if (!username) return;
-
-  document.getElementById("username").value = username;
-
-  try {
-    const res = await fetch(`${API}/me`, {
-      headers: { "Authorization": username }
-    });
-
-    if (!res.ok) return;
-    const data = await res.json();
-    document.getElementById("about").value = data.about_me || "";
-  } catch {}
-}
-
+/* Init */
 loadProfile();
 </script>
 
